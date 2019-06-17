@@ -8,11 +8,7 @@ const fs = require('fs')
 let version
 
 let status = (cb) => {
-  git.status({quiet: true}, function (err, stdout) {
-    if (err) {
-      process.exit(-1)
-    }
-
+  git.status({quiet: true}, (_, stdout) => {
     if (stdout.indexOf('nothing to commit') === -1) {
       console.log(color('Please, commit all files before publishing a new version\n', 'RED'))
       console.log(color(stdout, 'YELLOW'))
