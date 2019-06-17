@@ -7,15 +7,14 @@ const fs = require('fs')
 
 let version
 
-let status = (cb) => {
-  git.status({quiet: true}, (_, stdout) => {
+let status = () => {
+  return git.status({quiet: true}, (_, stdout) => {
     if (stdout.indexOf('nothing to commit') === -1) {
       console.log(color('Please, commit all files before publishing a new version\n', 'RED'))
       console.log(color(stdout, 'YELLOW'))
       process.exit(-1)
     }
   })
-  cb()
 }
 
 let getPackageJson = () => {
