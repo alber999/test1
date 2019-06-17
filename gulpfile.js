@@ -18,7 +18,7 @@ let status = () => {
 }
 
 let getPackageJson = () => {
-  return JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+  return JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 }
 
 let initVersion = (cb) => {
