@@ -46,12 +46,6 @@ let tag = () => {
     })
 }
 
-let revert = () => {
-  console.log(color('Reverting changes...', 'YELLOW'))
-  return src('./package.json')
-    .pipe(git.reset('HEAD~1', {args: '--hard'}))
-}
-
 let push = () => {
   return src('.')
     .pipe(git.push('origin', null, {args: '--follow-tags'}))
@@ -59,6 +53,12 @@ let push = () => {
       console.log(color(`Error creating tag ${version}: ${error}\n`, 'RED'))
       return revert()
     })
+}
+
+let revert = () => {
+  console.log(color('Reverting changes...', 'YELLOW'))
+  return src('./package.json')
+    .pipe(git.reset('HEAD~1', {args: '--hard'}))
 }
 
 exports.default = series(status, initVersion, upgradePackageJson, commit, tag, push)
